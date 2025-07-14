@@ -24,7 +24,7 @@ jobs:
       - name: Build postgres WASM via debian 12 sdk
         working-directory: ${{ github.workspace }}
         env:
-          SDKROOT: /tmp/sdk
+          IMG_NAME: "debian"
           DEBUG: true
         run: |
           bash ./wasm-build/build-with-docker.sh
