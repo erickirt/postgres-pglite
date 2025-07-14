@@ -21,10 +21,20 @@ jobs:
           fetch-depth: 1
           ref: 'REL_17_5_WASM-pglite'
 
-      - name: Build postgres WASM via debian 12 sdk
+      - name: Build postgres WASI via debian 12 sdk
         working-directory: ${{ github.workspace }}
         env:
           IMG_NAME: "debian"
           DEBUG: true
+          WASI: true
+        run: |
+          bash ./wasm-build/build-with-docker.sh
+
+      - name: Build postgres EMSCRIPTEN via debian 12 sdk
+        working-directory: ${{ github.workspace }}
+        env:
+          IMG_NAME: "debian"
+          DEBUG: true
+          WASI: false
         run: |
           bash ./wasm-build/build-with-docker.sh
