@@ -15,25 +15,16 @@ jobs:
   build:
     name: Build postgres-pglite (WASM Postgres)
     runs-on: ubuntu-22.04
-    env:
-      BUILD_CONFIG_FILE: pglite/.buildconfig
-      PGROOT: /tmp/pglite
-      TOTAL_MEMORY: 128MB
-      CMA_MB: 16
-      DEBUG: false
-      OBJDUMP: true
-      contrib: contrib
-      extra: extra
-      EXTRA_EXT: vector
-
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 1
+          ref: 'REL_17_5_WASM-pglite'
 
-      - name: Build postgres WASM via emsdk
+      - name: Build postgres WASM via debian 12 sdk
         working-directory: ${{ github.workspace }}
-        env: 
-          PGSRC: ${{ github.workspace }}
+        env:
+          SDKROOT: /tmp/sdk
+          DEBUG: true
         run: |
-          pglite/cibuild/build-with-docker.sh
+          bash ./wasm-build/build-with-docker.sh
