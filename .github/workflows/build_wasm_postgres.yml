@@ -6,9 +6,10 @@ permissions:
   contents: read
 
 on:
+  workflow_dispatch:
   workflow_call:
   push:
-    branches: ['pglite/REL_16_STABLE']
+    branches: ['REL_17_5_WASM-pglite']
   pull_request:
 
 jobs:
